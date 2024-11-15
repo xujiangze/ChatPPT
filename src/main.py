@@ -3,6 +3,7 @@ from input_parser import parse_input_text
 from ppt_generator import generate_presentation
 from template_manager import load_template, get_layout_mapping, print_layouts
 
+
 def main():
     input_text = """
     # ChatPPT_Demo
@@ -22,7 +23,7 @@ def main():
     ![未来增长](images/forecast.png)
     """
 
-    template_file = 'templates/MasterTemplate.pptx'
+    template_file = 'templates/Fair_frames_presentation.pptx'
     prs = load_template(template_file)
 
     print("Available Slide Layouts:")
@@ -33,6 +34,10 @@ def main():
     powerpoint_data, presentation_title = parse_input_text(input_text, layout_mapping)
 
     output_pptx = f"outputs/{presentation_title}.pptx"
+
+    # makedir
+    os.makedirs(os.path.dirname(output_pptx), exist_ok=True)
+
     generate_presentation(powerpoint_data, template_file, output_pptx)
 
 if __name__ == "__main__":
