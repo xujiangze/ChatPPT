@@ -42,6 +42,8 @@ class ImageAdvisor(ABC):
         ])
 
         self.model = ChatOpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+            base_url=os.environ.get("OPENAI_API_BASE"),
             model="gpt-4o-mini",
             temperature=0.7,
             max_tokens=4096,

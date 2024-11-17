@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+  my_chatppt:
+    image: chatppt:1.0
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_API_BASE: ${OPENAI_API_BASE}
+    ports:
+      - "8000:8000"
+    command: ["python", "src/gradio_server.py"]

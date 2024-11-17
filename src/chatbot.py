@@ -1,5 +1,5 @@
 # chatbot.py
-
+import os
 from abc import ABC, abstractmethod
 
 from langchain_openai import ChatOpenAI
@@ -45,6 +45,8 @@ class ChatBot(ABC):
 
         # 初始化 ChatOllama 模型，配置参数
         self.chatbot = system_prompt | ChatOpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+            base_url=os.environ.get("OPENAI_API_BASE"),
             model="gpt-4o-mini",
             temperature=0.5,
             max_tokens=4096
@@ -52,7 +54,6 @@ class ChatBot(ABC):
 
         # 将聊天机器人与消息历史记录关联
         self.chatbot_with_history = RunnableWithMessageHistory(self.chatbot, get_session_history)
-
 
     def chat_with_history(self, user_input, session_id=None):
         """

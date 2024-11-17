@@ -1,6 +1,6 @@
 # content_assistant.py
 from abc import ABC, abstractmethod
-
+import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate  # 导入提示模板相关类
 from langchain_core.messages import HumanMessage  # 导入消息类
@@ -39,6 +39,8 @@ class ContentAssistant(ABC):
         ])
 
         self.model = ChatOpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+            base_url=os.environ.get("OPENAI_API_BASE"),
             model="gpt-4o-mini",
             temperature=0.5,
             max_tokens=4096,

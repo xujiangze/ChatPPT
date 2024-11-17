@@ -187,5 +187,6 @@ if __name__ == "__main__":
     demo.queue().launch(
         share=False,
         server_name="0.0.0.0",
-        # auth=("django", "qaz!@#$") # ⚠️注意：记住修改密码
+        server_port=8000,
+        auth=("user", "pwd")
     )

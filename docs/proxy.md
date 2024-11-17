@@ -40,7 +40,8 @@ sudo apt install certbot python3-certbot-nginx -y
 运行以下命令，为域名（或子域名）生成 SSL 证书。以 `example.com` 为例：
 
 ```bash
-sudo certbot --nginx -d example.com
+sudo 
+
 ```
 
 ### 2.3 配置自动重定向到 HTTPS

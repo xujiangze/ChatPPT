@@ -15,12 +15,7 @@ BATCH_SIZE = 8  # 处理批次大小
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 # 初始化语音识别管道
-pipe = pipeline(
-    task="automatic-speech-recognition",  # 自动语音识别任务
-    model=MODEL_NAME,  # 指定模型
-    chunk_length_s=60,  # 每个音频片段的长度（秒）
-    device=device,  # 指定设备
-)
+pipe = None
 
 def convert_to_wav(input_path):
     """
@@ -72,6 +67,14 @@ def asr(audio_file, task="transcribe"):
     wav_file = convert_to_wav(audio_file)
 
     try:
+        global pipe
+        if pipe is None:
+            pipe = pipeline(
+                task="automatic-speech-recognition",  # 自动语音识别任务
+                model=MODEL_NAME,  # 指定模型
+                chunk_length_s=60,  # 每个音频片段的长度（秒）
+                device=device,  # 指定设备
+            )
         # 使用管道进行转录或翻译
         result = pipe(
             wav_file,
